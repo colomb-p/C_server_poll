@@ -53,7 +53,6 @@ int			main(int argc, char *argv[])
       exit(EXIT_FAILURE);
     }
   s = init_server(&addr, atoi(argv[1]));
-  printf("Server socket: %d\n", s);
   memset(fds, 0, sizeof(fds));
   fds[0].fd = s;
   fds[0].events = POLLIN;
@@ -67,9 +66,7 @@ int			main(int argc, char *argv[])
 	    {
 	      if (fds[i].fd == s)
 		{
-		  printf("%d\n", fds[i].revents);
 		  new_s = accept(s, NULL, NULL);
-		  printf("%d\n", new_s);
 		  fds[i + 1].fd = new_s;
 		  fds[i + 1].events = POLLOUT;
 		}
